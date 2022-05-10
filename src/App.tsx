@@ -1,25 +1,8 @@
-type TableProps<TItem> = {
-  items: TItem[];
-  renderItem: (item: TItem) => React.ReactNode;
-}
-
-function Table<TItem>(props: TableProps<TItem>) {
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-      {props.items.map((x, i) =>
-        <div key={i} style={{ display: 'block' }}>
-          {props.renderItem(x)}
-        </div>
-      )}
-    </div>
-  );
-}
-
 type Data = { name: string, location: string };
 
 function App() {
   return (
-    <Table<Data>
+    <List<Data>
       items={[
         { name: 'Alpha', location: 'Australia' },
         { name: 'Beta', location: 'America' },
@@ -31,3 +14,20 @@ function App() {
 }
 
 export default App;
+
+type ListProps<TItem> = {
+  items: TItem[];
+  renderItem: (item: TItem) => React.ReactNode;
+}
+
+function List<TItem>(props: ListProps<TItem>) {
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+      {props.items.map((x, i) =>
+        <div key={i}>
+          {props.renderItem(x)}
+        </div>
+      )}
+    </div>
+  );
+}
